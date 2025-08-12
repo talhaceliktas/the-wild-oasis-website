@@ -1,10 +1,5 @@
 const Loading = () => {
-  return (
-    <p>
-      Loading
-      Data...ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-    </p>
-  );
+  return <p>Loading Data...</p>;
 };
 
 export default Loading;

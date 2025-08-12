@@ -1,3 +1,11 @@
+export const metadata = {
+  title: "Guest Area",
+};
+
 export default function Page() {
-  return <h1>Account Page</h1>;
+  return (
+    <h2 className="text-accent-400 mb-7 text-2xl font-semibold">
+      Welcome Jonas
+    </h2>
+  );
 }
