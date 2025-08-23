@@ -1,12 +1,13 @@
 import CabinCard from "@/app/_components/CabinCard";
 import { getCabins } from "../_lib/data-service";
+import { CabinsArray } from "../../types";
 
-const CabinList = async ({ filter }) => {
+const CabinList = async ({ filter }: { filter: string }) => {
   const cabins = await getCabins();
 
   if (!cabins.length) return null;
 
-  let displayedCabins;
+  let displayedCabins: CabinsArray = [];
 
   if (filter === "all") displayedCabins = cabins;
   if (filter === "small")

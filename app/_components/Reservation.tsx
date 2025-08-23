@@ -1,8 +1,9 @@
+import { CabinProps } from "../../types";
 import { getBookedDatesByCabinId, getSettings } from "../_lib/data-service";
 import DateSelector from "./DateSelector";
 import ReservationForm from "./ReservationForm";
 
-const Reservation = async ({ cabin }) => {
+const Reservation = async ({ cabin }: CabinProps) => {
   const [settings, bookedDates] = await Promise.all([
     getSettings(),
     getBookedDatesByCabinId(cabin.id),

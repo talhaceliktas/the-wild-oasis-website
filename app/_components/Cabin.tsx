@@ -2,10 +2,10 @@ import Image from "next/image";
 import React from "react";
 import TextExpander from "./TextExpander";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
+import { CabinProps } from "@/types";
 
-const Cabin = ({ cabin }) => {
-  const { id, name, maxCapacity, regularPrice, discount, image, description } =
-    cabin;
+const Cabin = ({ cabin }: CabinProps) => {
+  const { name, maxCapacity, image, description } = cabin;
 
   return (
     <div className="border-primary-800 mb-24 grid grid-cols-[3fr_4fr] gap-20 border px-10 py-3">

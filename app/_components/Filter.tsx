@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { ButtonProps } from "../../types";
 
 const Filter = () => {
   const searchParams = useSearchParams();
@@ -9,7 +10,7 @@ const Filter = () => {
 
   const activeFilter = searchParams.get("capacity") ?? "all";
 
-  function handleFilter(filter) {
+  function handleFilter(filter: string) {
     const params = new URLSearchParams(searchParams);
     params.set("capacity", filter);
     router.replace(`${pathname}?${params.toString()}`);
@@ -49,7 +50,7 @@ const Filter = () => {
   );
 };
 
-function Button({ filter, handleFilter, activeFilter, children }) {
+function Button({ filter, handleFilter, activeFilter, children }: ButtonProps) {
   return (
     <button
       className={`hover:bg-primary-700 px-5 py-2 ${filter === activeFilter && "bg-primary-700 text-primary-50"}`}

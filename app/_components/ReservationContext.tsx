@@ -1,17 +1,40 @@
 "use client";
 
-import { createContext, use, useState } from "react";
-import { DateRange } from "react-day-picker";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
-const ReservationContext = createContext(null);
+export interface DataRange {
+  from?: Date;
+  to?: Date;
+}
 
-const initialState = {
+export interface ReservationContextType {
+  range: DataRange | undefined;
+  setRange: Dispatch<SetStateAction<DataRange | undefined>>;
+  resetRange: () => void;
+}
+
+export interface ReservationProviderProps {
+  children: ReactNode;
+}
+
+const ReservationContext = createContext<ReservationContextType | undefined>(
+  undefined,
+);
+
+const initialState: DataRange = {
   from: undefined,
   to: undefined,
 };
 
-function ReservationProvider({ children }) {
-  const [range, setRange] = useState<DateRange | undefined>(initialState);
+export function ReservationProvider({ children }: ReservationProviderProps) {
+  const [range, setRange] = useState<DataRange | undefined>(initialState);
   const resetRange = () => setRange(initialState);
 
   return (
@@ -21,11 +44,8 @@ function ReservationProvider({ children }) {
   );
 }
 
-function useReservation() {
-  const context = use(ReservationContext);
-  if (!context === undefined)
-    throw new Error("Context was used outside provider");
+export function useReservation(): ReservationContextType {
+  const context = useContext(ReservationContext);
+  if (!context) throw new Error("Context was used outside provider");
   return context;
 }
-
-export { ReservationProvider, useReservation };
