@@ -1,8 +1,15 @@
 "use client";
 
 import { isWithinInterval } from "date-fns";
-import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
+import { useReservation } from "./ReservationContext";
+import "react-day-picker/style.css";
+import {
+  DayPicker,
+  MonthsDropdown,
+  Nav,
+  YearsDropdown,
+} from "react-day-picker";
+import { MyNextMonthButton, MyPreviousMonthButton } from "./DatePickerButtons";
 
 function isAlreadyBooked(range, datesArr) {
   return (
@@ -15,28 +22,80 @@ function isAlreadyBooked(range, datesArr) {
 }
 
 function DateSelector({ settings, cabin, bookedDates }) {
+  const { range, setRange, resetRange } = useReservation();
+
   // CHANGE
-  const regularPrice = 23;
-  const discount = 23;
+  const regularPrice = cabin.regularPrice;
+  const discount = cabin.discount;
   const numNights = 23;
-  const cabinPrice = 23;
-  const range = { from: null, to: null };
+  const cabinPrice = (regularPrice - discount) * numNights;
 
   // SETTINGS
   const { minBookingLength, maxBookingLength } = settings;
+
+  console.log(maxBookingLength);
 
   return (
     <div className="flex flex-col justify-between">
       <DayPicker
         className="place-self-center pt-12"
         mode="range"
+        onSelect={setRange}
+        selected={range}
         min={minBookingLength + 1}
         max={maxBookingLength}
         fromMonth={new Date()}
         fromDate={new Date()}
         toYear={new Date().getFullYear() + 5}
+        disabled={{ before: new Date() }}
         captionLayout="dropdown"
         numberOfMonths={2}
+        classNames={{
+          selected: `bg-accent-500 text-white`,
+          range_start: `bg-accent-600 text-white`,
+          range_end: `bg-accent-600 text-white`,
+          range_middle: `bg-accent-500 text-white`,
+          disabled: "text-gray-500",
+          today: "text-accent-500",
+        }}
+        style={
+          {
+            "--rdp-accent-color": "var(--color-accent-600)",
+            "--rdp-accent-background-color": "#eff6ff",
+            "--rdp-day-width": "30px",
+            "--rdp-day_button-width": "30px",
+            "--rdp-day-height": "30px",
+            "--rdp-day_button-height": "30px",
+          } as React.CSSProperties
+        }
+        components={{
+          PreviousMonthButton: MyPreviousMonthButton,
+          NextMonthButton: MyNextMonthButton,
+          MonthsDropdown: (props) => {
+            return (
+              <MonthsDropdown
+                {...props}
+                className="text-accent-600 cursor-pointer rounded border border-gray-300 p-1"
+              />
+            );
+          },
+          YearsDropdown: (props) => {
+            return (
+              <YearsDropdown
+                {...props}
+                className="text-accent-600 cursor-pointer rounded border border-gray-300 p-1"
+              />
+            );
+          },
+          Nav: (props) => {
+            return (
+              <Nav
+                {...props}
+                className="absolute top-[-2rem] left-[0rem] z-10 flex items-center gap-2"
+              />
+            );
+          },
+        }}
       />
 
       <div className="bg-accent-500 text-primary-800 flex h-[72px] items-center justify-between px-8">
@@ -70,7 +129,7 @@ function DateSelector({ settings, cabin, bookedDates }) {
         {range.from || range.to ? (
           <button
             className="border-primary-800 border px-4 py-2 text-sm font-semibold"
-            onClick={() => resetRange()}
+            onClick={resetRange}
           >
             Clear
           </button>
