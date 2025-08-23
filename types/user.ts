@@ -1,4 +1,3 @@
-import { classNames } from "react-day-picker/style.module.css";
 import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export interface Cabin {

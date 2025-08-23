@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 
-const UpdateProfileForm = ({ children }) => {
+const UpdateProfileForm = ({ children }: { children: ReactNode }) => {
   const [count, setCount] = useState();
 
   // CHANGE
