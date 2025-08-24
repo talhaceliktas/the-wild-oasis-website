@@ -9,9 +9,9 @@ import Cabin from "../../_components/Cabin";
 // };
 
 export async function generateMetadata({ params }) {
-  const { cabinId } = await params;
+  const { cabinId, description } = await params;
   const { name } = await getCabin(cabinId);
-  return { title: `Cabin ${name}` };
+  return { title: `Cabin ${name}`, description };
 }
 
 export async function generateStaticParams() {

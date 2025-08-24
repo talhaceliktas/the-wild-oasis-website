@@ -14,6 +14,7 @@ function CabinCard({ cabin }: CabinProps) {
           fill
           alt={`Cabin ${name}`}
           className="border-primary-800 flex-1 border-r object-cover"
+          sizes="(max-width: 768px) 100vw, 33vw"
         />
       </div>
 

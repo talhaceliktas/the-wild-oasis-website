@@ -11,6 +11,7 @@ import {
 } from "react-day-picker";
 import { MyNextMonthButton, MyPreviousMonthButton } from "./DatePickerButtons";
 import { DateSelectorProps } from "@/types";
+import { differenceInDays } from "date-fns";
 
 function isAlreadyBooked(range: DateRange, datesArr: Date[]) {
   // return (
@@ -28,7 +29,7 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
   // CHANGE
   const regularPrice = cabin.regularPrice;
   const discount = cabin.discount;
-  const numNights = 23;
+  const numNights = differenceInDays(range?.to, range?.from);
   const cabinPrice = (regularPrice - discount) * numNights;
 
   // SETTINGS

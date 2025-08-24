@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "prod": "next build && next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dev-t": "next dev --turbopack"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

@@ -8,6 +8,8 @@ export const revalidate = 86400;
 
 export const metadata = {
   title: "About",
+  description:
+    "Where nature's beauty and comfortable living blend seamlessly. Hidden away in the heart of the Italian Dolomites, this is your paradise away from home. But it's not just about the luxury cabins. It's about the experience of reconnecting with nature and enjoying simple pleasures with family.",
 };
 
 export default async function Page() {
