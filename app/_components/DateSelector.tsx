@@ -4,6 +4,7 @@ import { useReservation } from "./ReservationContext";
 import "react-day-picker/style.css";
 import {
   DateRange,
+  DayButton,
   DayPicker,
   MonthsDropdown,
   Nav,
@@ -75,7 +76,7 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
             return (
               <MonthsDropdown
                 {...props}
-                className="text-accent-600 cursor-pointer rounded border border-gray-300 p-1"
+                className="text-accent-300 bg-primary-900 cursor-pointer rounded border border-gray-300 p-1 text-center"
               />
             );
           },
@@ -83,7 +84,7 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
             return (
               <YearsDropdown
                 {...props}
-                className="text-accent-600 cursor-pointer rounded border border-gray-300 p-1"
+                className="text-accent-300 bg-primary-900 cursor-pointer rounded border border-gray-300 p-1 text-center"
               />
             );
           },
@@ -94,6 +95,9 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
                 className="absolute top-[-2rem] left-[0rem] z-10 flex items-center gap-2"
               />
             );
+          },
+          DayButton: (props) => {
+            return <DayButton {...props} className="hover:text-accent-400" />;
           },
         }}
       />

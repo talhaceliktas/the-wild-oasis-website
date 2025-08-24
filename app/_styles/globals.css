@@ -54,13 +54,6 @@
   }
 }
 
-.rdp {
-  --rdp-cell-size: 32px !important;
-  --rdp-accent-color: var(--color-accent-500) !important;
-  --rdp-background-color: var(--color-accent-600) !important;
-  margin: 0 !important;
-}
-
 --rdp-accent-color {
   color: rebeccapurple;
 }
