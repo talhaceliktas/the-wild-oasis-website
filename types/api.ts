@@ -1,4 +1,3 @@
-export interface User {
+export interface example {
   id: number;
-  name: string;
 }
