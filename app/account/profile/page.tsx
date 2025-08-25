@@ -1,3 +1,4 @@
+import { User } from "../../../types";
 import SelectCountry from "../../_components/SelectCountry";
 import UpdateProfileForm from "../../_components/UpdateProfileForm";
 import { auth } from "../../_lib/auth";
@@ -9,7 +10,7 @@ export const metadata = {
 
 export default async function Page() {
   const sesion = await auth();
-  const guest = await getGuest(sesion.user.email);
+  const guest: User = await getGuest(sesion.user.email);
 
   return (
     <div>

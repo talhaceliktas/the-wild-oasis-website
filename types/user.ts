@@ -73,3 +73,24 @@ export interface BookingType {
   created_at: string;
   cabins: CabinInfo;
 }
+
+export interface User {
+  id: number;
+  fullName: string;
+  email: string;
+  nationalID: string;
+  nationality: string;
+  countryFlag: string;
+  created_at: string;
+}
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      guestId: number;
+    };
+  }
+}
