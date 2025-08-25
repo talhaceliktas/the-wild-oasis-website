@@ -2,18 +2,19 @@
 
 import React, { ReactNode, useState } from "react";
 
-const UpdateProfileForm = ({ children }: { children: ReactNode }) => {
+const UpdateProfileForm = ({ children, guest }: { children: ReactNode }) => {
   const [count, setCount] = useState();
 
-  // CHANGE
-  const countryFlag = "pt.jpg";
-  const nationality = "portugal";
+  const { fullName, email, nationality, nationalID, countryFlag } = guest;
+
+  console.log(guest);
 
   return (
     <form className="bg-primary-900 flex flex-col gap-6 px-12 py-8 text-lg">
       <div className="space-y-2">
         <label>Full name</label>
         <input
+          defaultValue={fullName}
           disabled
           className="bg-primary-200 text-primary-800 w-full rounded-sm px-5 py-3 shadow-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
         />
@@ -22,6 +23,7 @@ const UpdateProfileForm = ({ children }: { children: ReactNode }) => {
       <div className="space-y-2">
         <label>Email address</label>
         <input
+          defaultValue={email}
           disabled
           className="bg-primary-200 text-primary-800 w-full rounded-sm px-5 py-3 shadow-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
         />
@@ -31,6 +33,7 @@ const UpdateProfileForm = ({ children }: { children: ReactNode }) => {
         <div className="flex items-center justify-between">
           <label htmlFor="nationality">Where are you from?</label>
           <img
+            defaultValue={nationalID}
             src={countryFlag}
             alt="Country flag"
             className="h-5 rounded-sm"
