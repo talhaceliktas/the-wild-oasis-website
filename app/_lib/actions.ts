@@ -3,6 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "./auth";
 import { supabase } from "./supabase";
+import { getBooking, getBookings } from "./data-service";
+import { redirect } from "next/navigation";
 
 export async function updateGuest(formData) {
   const session = await auth();
@@ -26,6 +28,61 @@ export async function updateGuest(formData) {
   }
 
   revalidatePath("/account/profile");
+}
+
+export async function deleteReservation(bookingId: number) {
+  const session = await auth();
+  if (!session) throw new Error("You must be logged in!");
+
+  const guestBookings = await getBookings(session.user.guestId);
+  const guestBookingIds = guestBookings.map((booking) => booking.id);
+
+  if (!guestBookingIds.includes(bookingId))
+    throw new Error("You are not allowed to delete this booking");
+
+  const { error } = await supabase
+    .from("bookings")
+    .delete()
+    .eq("id", bookingId);
+
+  if (error) {
+    throw new Error("Booking could not be deleted");
+  }
+
+  revalidatePath("/account/reservations");
+}
+
+export async function updateBooking(formData: FormData) {
+  const session = await auth();
+  if (!session) throw new Error("You must be logged in!");
+
+  const bookingId = formData.get("bookingId");
+  if (!bookingId) throw new Error("Reservation ID is missing");
+  const reservationId = Number(bookingId);
+
+  const booking = await getBooking(reservationId);
+  if (!booking) throw new Error("Booking not found");
+
+  if (session.user.guestId !== booking.guestId)
+    throw new Error("You can change only your bookings!");
+
+  const updatedFields = {
+    numGuests: Number(formData.get("numGuests") ?? 0),
+    observations: formData.get("observations") ?? "",
+  };
+
+  const { error } = await supabase
+    .from("bookings")
+    .update(updatedFields)
+    .eq("id", reservationId)
+    .select()
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Booking could not be updated");
+  }
+  redirect("/account/reservations");
 }
 
 export async function signInActionGoogle() {
