@@ -12,25 +12,32 @@ import {
 } from "react-day-picker";
 import { MyNextMonthButton, MyPreviousMonthButton } from "./DatePickerButtons";
 import { DateSelectorProps } from "@/types";
-import { differenceInDays } from "date-fns";
+import {
+  differenceInDays,
+  isPast,
+  isSameDay,
+  isWithinInterval,
+} from "date-fns";
 
 function isAlreadyBooked(range: DateRange, datesArr: Date[]) {
-  // return (
-  //   range.from &&
-  //   range.to &&
-  //   datesArr.some((date) =>
-  //     isWithinInterval(date, { start: range.from, end: range.to }),
-  //   )
-  // );
+  return (
+    range.from &&
+    range.to &&
+    datesArr.some((date) =>
+      isWithinInterval(date, { start: range.from, end: range.to }),
+    )
+  );
 }
 
 function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
   const { range, setRange, resetRange } = useReservation();
 
+  const displayRange = isAlreadyBooked(range, bookedDates) ? undefined : range;
+
   // CHANGE
   const regularPrice = cabin.regularPrice;
   const discount = cabin.discount;
-  const numNights = differenceInDays(range?.to, range?.from);
+  const numNights = differenceInDays(displayRange?.to, displayRange?.from);
   const cabinPrice = (regularPrice - discount) * numNights;
 
   // SETTINGS
@@ -42,13 +49,16 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
         className="place-self-center pt-12"
         mode="range"
         onSelect={setRange}
-        selected={range as DateRange | undefined}
+        selected={displayRange as DateRange | undefined}
         min={minBookingLength + 1}
         max={maxBookingLength}
         fromMonth={new Date()}
         fromDate={new Date()}
         toYear={new Date().getFullYear() + 5}
-        disabled={{ before: new Date() }}
+        disabled={(curDate) =>
+          isPast(curDate) ||
+          bookedDates.some((date) => isSameDay(date, curDate))
+        }
         captionLayout="dropdown"
         numberOfMonths={2}
         classNames={{
@@ -130,7 +140,7 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
           ) : null}
         </div>
 
-        {range?.from || range?.to ? (
+        {(range?.from || range?.to) && displayRange?.to ? (
           <button
             className="border-primary-800 border px-4 py-2 text-sm font-semibold"
             onClick={resetRange}
