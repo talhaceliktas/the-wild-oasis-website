@@ -3,7 +3,7 @@
 import React, { ReactNode, useState } from "react";
 import { updateGuest } from "../_lib/actions";
 import { User } from "../../types";
-import { useFormStatus } from "react-dom";
+import SubmitButton from "./SubmitButton";
 
 const UpdateProfileForm = ({
   children,
@@ -65,23 +65,10 @@ const UpdateProfileForm = ({
       </div>
 
       <div className="flex items-center justify-end gap-6">
-        <Button />
+        <SubmitButton pendingLabel="Updating...">Update Profile</SubmitButton>
       </div>
     </form>
   );
 };
-
-function Button() {
-  const { pending } = useFormStatus();
-
-  return (
-    <button
-      className="bg-accent-500 text-primary-800 hover:bg-accent-600 px-8 py-4 font-semibold transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300"
-      disabled={pending}
-    >
-      {pending ? "Updating..." : "Update profile"}
-    </button>
-  );
-}
 
 export default UpdateProfileForm;

@@ -56,11 +56,6 @@ export interface SelectCountryProps {
   className: string;
 }
 
-type CabinInfo = {
-  name: string;
-  image: string;
-};
-
 export interface BookingType {
   id: number;
   guestId: number;
@@ -71,7 +66,8 @@ export interface BookingType {
   numGuests: number;
   status: string;
   created_at: string;
-  cabins: CabinInfo;
+  cabinId: number;
+  cabins: { name: string; image: string };
 }
 
 export interface User {

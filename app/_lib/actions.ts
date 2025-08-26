@@ -53,9 +53,11 @@ export async function deleteReservation(bookingId: number) {
 }
 
 export async function updateBooking(formData: FormData) {
+  // 1.Authentication
   const session = await auth();
   if (!session) throw new Error("You must be logged in!");
 
+  // 2.Authorization
   const bookingId = formData.get("bookingId");
   if (!bookingId) throw new Error("Reservation ID is missing");
   const reservationId = Number(bookingId);
@@ -66,11 +68,13 @@ export async function updateBooking(formData: FormData) {
   if (session.user.guestId !== booking.guestId)
     throw new Error("You can change only your bookings!");
 
+  // 3.Building update data
   const updatedFields = {
     numGuests: Number(formData.get("numGuests") ?? 0),
-    observations: formData.get("observations") ?? "",
+    observations: formData.get("observations").slice(0, 1000) ?? "",
   };
 
+  // 4. Mutation
   const { error } = await supabase
     .from("bookings")
     .update(updatedFields)
@@ -78,10 +82,17 @@ export async function updateBooking(formData: FormData) {
     .select()
     .single();
 
+  // 5. Error handling
   if (error) {
     console.error(error);
     throw new Error("Booking could not be updated");
   }
+
+  // 6. Revalite
+  revalidatePath("/account/reservations");
+  revalidatePath(`/account/reservations/${bookingId}`);
+
+  // 7. Redirect
   redirect("/account/reservations");
 }
 
