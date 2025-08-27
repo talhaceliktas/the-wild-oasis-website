@@ -21,7 +21,7 @@ function DeleteReservation({
   return (
     <button
       onClick={handleDelete}
-      className="group text-primary-300 hover:bg-accent-600 hover:text-primary-900 flex flex-grow items-center gap-2 px-3 text-xs font-bold uppercase transition-colors"
+      className="group text-primary-300 hover:bg-accent-600 hover:text-primary-900 flex flex-grow cursor-pointer items-center gap-2 px-3 text-xs font-bold uppercase transition-colors"
     >
       {isPending ? (
         <span className="mx-auto">
