@@ -57,3 +57,10 @@
 --rdp-accent-color {
   color: rebeccapurple;
 }
+
+@media (width <= 64rem) {
+  .rdp-months {
+    display: block !important;
+    margin-bottom: 2rem;
+  }
+}

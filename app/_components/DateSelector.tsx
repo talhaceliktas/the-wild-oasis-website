@@ -77,6 +77,7 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
             "--rdp-day_button-width": "30px",
             "--rdp-day-height": "30px",
             "--rdp-day_button-height": "30px",
+            "--rdp-months-display": "block",
           } as React.CSSProperties
         }
         components={{

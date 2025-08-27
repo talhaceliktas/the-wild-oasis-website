@@ -10,7 +10,7 @@ const Reservation = async ({ cabin }: CabinProps) => {
   ]);
 
   return (
-    <div className="border-primary-800 grid min-h-[400px] grid-cols-2 border">
+    <div className="border-primary-800 grid min-h-[400px] border md:grid-cols-2">
       <DateSelector
         settings={settings}
         bookedDates={bookedDates}
