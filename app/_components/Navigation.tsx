@@ -3,7 +3,7 @@ import User from "./Guest";
 
 export default async function Navigation() {
   return (
-    <nav className="z-10 text-xl">
+    <nav className="z-10 hidden text-xl md:block">
       <ul className="flex items-center gap-16">
         <li>
           <Link

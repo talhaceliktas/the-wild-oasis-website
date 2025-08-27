@@ -11,7 +11,7 @@ export default function User() {
       {session?.user?.image ? (
         <Link
           href="/account"
-          className="hover:text-accent-400 flex items-center gap-4 transition-colors"
+          className="hover:text-accent-400 flex flex-col-reverse items-center gap-2 transition-colors md:flex-row md:gap-4"
         >
           <img
             src={session.user.image}
