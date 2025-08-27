@@ -113,12 +113,14 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
         }}
       />
 
-      <div className="bg-accent-500 text-primary-800 flex h-[72px] items-center justify-between px-8">
+      <div className="bg-accent-500 text-primary-800 flex h-[72px] items-center justify-between px-2 md:px-8">
         <div className="flex items-baseline gap-6">
-          <p className="flex items-baseline gap-2">
+          <p className="div flex flex-wrap items-baseline gap-2 md:flex-nowrap">
             {discount > 0 ? (
               <>
-                <span className="text-2xl">${regularPrice - discount}</span>
+                <span className="text-xl md:text-2xl">
+                  ${regularPrice - discount}
+                </span>
                 <span className="text-primary-700 font-semibold line-through">
                   ${regularPrice}
                 </span>
@@ -130,12 +132,16 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
           </p>
           {numNights ? (
             <>
-              <p className="bg-accent-600 px-3 py-2 text-2xl">
+              <p className="bg-accent-600 px-1 py-2 text-2xl md:px-3">
                 <span>&times;</span> <span>{numNights}</span>
               </p>
               <p>
-                <span className="text-lg font-bold uppercase">Total</span>{" "}
-                <span className="text-2xl font-semibold">${cabinPrice}</span>
+                <span className="text-md font-bold uppercase md:text-lg">
+                  Total
+                </span>{" "}
+                <span className="text-xl font-semibold md:text-2xl">
+                  ${cabinPrice}
+                </span>
               </p>
             </>
           ) : null}
@@ -143,7 +149,7 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
 
         {(range?.from || range?.to) && displayRange?.to ? (
           <button
-            className="border-primary-800 border px-4 py-2 text-sm font-semibold"
+            className="border-primary-800 block border text-sm font-semibold md:px-4 md:py-2"
             onClick={resetRange}
           >
             Clear

@@ -21,7 +21,7 @@ export default function MobileNavigation({ open, setOpen }) {
       <ul
         className={`bg-primary-800 flex w-screen transform flex-col items-center justify-center gap-y-2 p-4 duration-500`}
       >
-        <li className="mb-4">
+        <li className="mb-4" onClick={onClick}>
           <Logo></Logo>
         </li>
 
