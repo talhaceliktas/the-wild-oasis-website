@@ -17,7 +17,7 @@ export default async function Page() {
   const numOfCabins = cabins.length;
 
   return (
-    <div className="grid grid-cols-5 items-center gap-x-24 gap-y-32 text-lg">
+    <div className="grid grid-cols-1 items-center gap-y-12 text-lg md:grid-cols-5 md:gap-x-24 md:gap-y-20">
       <div className="col-span-3">
         <h1 className="text-accent-400 mb-10 text-4xl font-medium">
           Welcome to The Wild Oasis
@@ -54,6 +54,10 @@ export default async function Page() {
         />
       </div>
 
+      <h1 className="text-accent-400 col-span-4 mb-0 text-4xl font-medium">
+        Managed by our family since 1962
+      </h1>
+
       <div className="relative col-span-2 aspect-square">
         <Image
           fill
@@ -64,10 +68,6 @@ export default async function Page() {
       </div>
 
       <div className="col-span-3">
-        <h1 className="text-accent-400 mb-10 text-4xl font-medium">
-          Managed by our family since 1962
-        </h1>
-
         <div className="space-y-8">
           <p>
             Since 1962, The Wild Oasis has been a cherished family-run retreat.
@@ -87,7 +87,7 @@ export default async function Page() {
           <div>
             <Link
               href="/cabins"
-              className="bg-accent-500 text-primary-800 hover:bg-accent-600 mt-4 inline-block px-8 py-5 text-lg font-semibold transition-all"
+              className="bg-accent-500 text-primary-800 hover:bg-accent-600 mt-4 inline-block px-6 py-3 text-lg font-semibold transition-all md:px-8 md:py-5"
             >
               Explore our luxury cabins
             </Link>
