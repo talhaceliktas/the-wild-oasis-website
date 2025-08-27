@@ -8,10 +8,10 @@ const MobileNav = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <>
+    <div>
       <NavButton open={open} setOpen={setOpen} />
       <MobileNavigation open={open} setOpen={setOpen} />
-    </>
+    </div>
   );
 };
 

@@ -2,9 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 import logo from "@/public/logo.png";
 
-function Logo() {
+function Logo({ children = "" }) {
   return (
-    <Link href="/" className="z-100 flex items-center gap-4">
+    <Link href="/" className={`z-100 flex items-center ${children && "gap-4"}`}>
       {/* <Image src="/logo.png" height="60" width="60" alt="The Wild Oasis logo" /> */}
 
       <Image
@@ -16,7 +16,7 @@ function Logo() {
         placeholder="blur"
       />
       <span className="text-primary-100 cursor-pointer text-xl font-semibold">
-        The Wild Oasis
+        {children}
       </span>
     </Link>
   );

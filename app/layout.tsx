@@ -6,6 +6,7 @@ import { AuthProvider } from "@/app/_components/AuthContext";
 import { ReservationProvider } from "./_components/ReservationContext";
 
 import { Josefin_Sans } from "next/font/google";
+import MobileNav from "./_components/MobileNav";
 
 const josefin = Josefin_Sans({
   subsets: ["latin"],
@@ -34,6 +35,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
             className={`${josefin.className} bg-primary-950 text-primary-100 flex min-h-screen flex-col antialiased`}
           >
             <Header />
+            <MobileNav />
+
             <div className="grid flex-1 px-4 py-8 md:px-8 md:py-12">
               <main className="mx-auto w-full max-w-7xl">
                 <ReservationProvider>{children}</ReservationProvider>
