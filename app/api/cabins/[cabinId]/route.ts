@@ -1,16 +1,18 @@
+import { NextRequest, NextResponse } from "next/server";
 import { getBookedDatesByCabinId, getCabin } from "../../../_lib/data-service";
 
-export async function GET(request, { params }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function GET(request: NextRequest, { params }: { params: any }) {
   const { cabinId } = params;
 
   try {
     const [cabin, bookedDates] = await Promise.all([
-      getCabin(cabinId),
-      getBookedDatesByCabinId(cabinId),
+      getCabin(Number(cabinId)),
+      getBookedDatesByCabinId(Number(cabinId)),
     ]);
-    return Response.json({ cabin, bookedDates });
+    return NextResponse.json({ cabin, bookedDates });
   } catch {
-    return Response.json({ message: "Cabin not found" });
+    return NextResponse.json({ message: "Cabin not found" });
   }
 }
 

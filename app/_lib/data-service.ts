@@ -5,7 +5,7 @@ import { BookingType, Cabin, CabinsArray } from "../../types";
 /////////////
 // GET
 
-export async function getCabin(id: number): Promise<Cabin | null> {
+export async function getCabin(id: number): Promise<Cabin> {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
@@ -155,7 +155,10 @@ export async function getCountries() {
 /////////////
 // CREATE
 
-export async function createGuest(newGuest) {
+export async function createGuest(newGuest: {
+  email: string;
+  fullName: string;
+}) {
   const { data, error } = await supabase.from("guests").insert([newGuest]);
 
   if (error) {

@@ -10,6 +10,7 @@ import {
 } from "./data-service";
 import { redirect } from "next/navigation";
 import { isWithinInterval } from "date-fns";
+import { bookingData } from "../../types";
 
 export async function updateGuest(formData: FormData) {
   const session = await auth();
@@ -45,7 +46,10 @@ export async function updateGuest(formData: FormData) {
   revalidatePath("/account/profile");
 }
 
-export async function createBooking(bookingData, formData: FormData) {
+export async function createBooking(
+  bookingData: bookingData,
+  formData: FormData,
+) {
   const session = await auth();
   if (!session) throw new Error("You must be logged in!");
 
@@ -64,6 +68,10 @@ export async function createBooking(bookingData, formData: FormData) {
   };
 
   const bookedDays: Date[] = await getBookedDatesByCabinId(bookingData.cabinId);
+
+  if (!bookingData.startDate || !bookingData.endDate) {
+    throw new Error("Start date or end date is missing");
+  }
 
   const startDate = new Date(bookingData.startDate);
   const endDate = new Date(bookingData.endDate);
@@ -128,7 +136,7 @@ export async function updateBooking(formData: FormData) {
   // 3.Building update data
   const updatedFields = {
     numGuests: Number(formData.get("numGuests") ?? 0),
-    observations: formData.get("observations").slice(0, 1000) ?? "",
+    observations: (formData.get("observations") ?? "").slice(0, 1000),
   };
 
   // 4. Mutation

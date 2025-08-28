@@ -8,8 +8,11 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const sesion = await auth();
-  const bookings = await getBookings(sesion.user.guestId);
+  const session = await auth();
+
+  if (!session) throw new Error("No session found!");
+
+  const bookings = await getBookings(session.user.guestId);
 
   return (
     <div>

@@ -2,10 +2,13 @@ import SubmitButton from "../../../../_components/SubmitButton";
 import { updateBooking } from "../../../../_lib/actions";
 import { getBooking, getCabin } from "../../../../_lib/data-service";
 
-export default async function Page({ params }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function Page({ params }: { params: any }) {
   const { reservationId } = await params;
 
-  const { numGuests, observations, cabinId } = await getBooking(reservationId);
+  const { numGuests, observations, cabinId } = await getBooking(
+    Number(reservationId),
+  );
   const { maxCapacity } = await getCabin(cabinId);
 
   return (

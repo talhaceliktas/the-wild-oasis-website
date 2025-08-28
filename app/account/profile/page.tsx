@@ -9,8 +9,13 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const sesion = await auth();
-  const guest: User = await getGuest(sesion.user.email);
+  const session = await auth();
+
+  if (!session) {
+    throw new Error("User is not logged in");
+  }
+
+  const guest: User = await getGuest(session.user.email!);
 
   return (
     <div>

@@ -1,4 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
+import "next-auth";
+import { DefaultSession } from "next-auth";
 
 export interface Cabin {
   id: number;
@@ -83,10 +85,22 @@ export interface User {
 declare module "next-auth" {
   interface Session {
     user: {
-      name?: string | null;
-      email?: string | null;
-      image?: string | null;
       guestId: number;
-    };
+    } & DefaultSession["user"];
+  }
+
+  interface User {
+    guestId?: number;
+    email?: string;
+    image?: string;
+    name?: string;
   }
 }
+
+export type AuthUser = DefaultSession["user"] & {
+  guestId: number;
+};
+
+export type AuthSession = DefaultSession & {
+  user: AuthUser;
+};

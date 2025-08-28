@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { CabinProps } from "../../types";
+import { bookingData, CabinProps } from "../../types";
 import { useAuth } from "./AuthContext";
 import LoginMessage from "./LoginMessage";
 import { useReservation } from "./ReservationContext";
@@ -26,7 +26,7 @@ function ReservationForm({ cabin }: CabinProps) {
   );
   const cabinPrice = numNights * (regularPrice - discount);
 
-  const bookingData = {
+  const bookingData: bookingData = {
     startDate,
     endDate,
     numNights,

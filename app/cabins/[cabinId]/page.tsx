@@ -7,8 +7,8 @@ import Cabin from "../../_components/Cabin";
 // export const metadata = {
 //   title: "Cabin",
 // };
-
-export async function generateMetadata({ params }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function generateMetadata({ params }: { params: any }) {
   const { cabinId, description } = await params;
   const { name } = await getCabin(cabinId);
   return { title: `Cabin ${name}`, description };
@@ -20,8 +20,8 @@ export async function generateStaticParams() {
 
   return ids;
 }
-
-export default async function Page({ params }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function Page({ params }: { params: any }) {
   const { cabinId } = await params;
 
   const cabin = await getCabin(cabinId);
