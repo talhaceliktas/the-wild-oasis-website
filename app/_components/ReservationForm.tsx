@@ -17,10 +17,13 @@ function ReservationForm({ cabin }: CabinProps) {
 
   const { maxCapacity, regularPrice, discount, id } = cabin;
 
-  const startDate = range.from;
-  const endDate = range.to;
+  const startDate = range?.from;
+  const endDate = range?.to;
 
-  const numNights = differenceInDays(endDate, startDate);
+  const numNights = differenceInDays(
+    endDate ?? new Date(),
+    startDate ?? new Date(),
+  );
   const cabinPrice = numNights * (regularPrice - discount);
 
   const bookingData = {
@@ -43,8 +46,8 @@ function ReservationForm({ cabin }: CabinProps) {
             // Important to display google profile images
             referrerPolicy="no-referrer"
             className="h-8 rounded-full"
-            src={user.image}
-            alt={user.name}
+            src={user.image ?? ""}
+            alt={user.name ?? ""}
             width={30}
             height={30}
           />

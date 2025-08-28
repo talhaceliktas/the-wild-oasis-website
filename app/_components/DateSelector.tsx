@@ -19,12 +19,15 @@ import {
   isWithinInterval,
 } from "date-fns";
 
-function isAlreadyBooked(range: DateRange, datesArr: Date[]) {
+function isAlreadyBooked(range: DateRange | undefined, datesArr: Date[]) {
   return (
-    range.from &&
+    range?.from &&
     range.to &&
     datesArr.some((date) =>
-      isWithinInterval(date, { start: range.from, end: range.to }),
+      isWithinInterval(date, {
+        start: range.from ?? new Date(),
+        end: range.to ?? new Date(),
+      }),
     )
   );
 }
@@ -37,7 +40,15 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
   // CHANGE
   const regularPrice = cabin.regularPrice;
   const discount = cabin.discount;
-  const numNights = differenceInDays(displayRange?.to, displayRange?.from);
+
+  let numNights: number;
+
+  if (displayRange?.from && displayRange?.to) {
+    numNights = differenceInDays(displayRange.to, displayRange.from);
+  } else {
+    numNights = 0;
+  }
+
   const cabinPrice = (regularPrice - discount) * numNights;
 
   // SETTINGS
@@ -136,7 +147,7 @@ function DateSelector({ settings, cabin, bookedDates }: DateSelectorProps) {
                 <span>&times;</span> <span>{numNights}</span>
               </p>
               <p>
-                <span className="text-md font-bold uppercase md:text-lg">
+                <span className="text-base font-bold uppercase md:text-lg">
                   Total
                 </span>{" "}
                 <span className="text-xl font-semibold md:text-2xl">

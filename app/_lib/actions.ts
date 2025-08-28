@@ -11,12 +11,22 @@ import {
 import { redirect } from "next/navigation";
 import { isWithinInterval } from "date-fns";
 
-export async function updateGuest(formData) {
+export async function updateGuest(formData: FormData) {
   const session = await auth();
   if (!session) throw new Error("You must be logged in!");
 
   const nationalID = formData.get("nationalID");
-  const [nationality, countryFlag] = formData.get("nationality").split("%");
+  const nationalityValue = formData.get("nationality");
+
+  if (typeof nationalityValue !== "string") {
+    throw new Error("Nationality must be a string");
+  }
+
+  const [nationality, countryFlag] = nationalityValue.split("%");
+
+  if (typeof nationalID !== "string") {
+    throw new Error("National ID must be a string");
+  }
 
   if (!/^[a-zA-Z0-9]{6,12}$/.test(nationalID))
     throw new Error("Please provide a valid national ID");
@@ -35,15 +45,17 @@ export async function updateGuest(formData) {
   revalidatePath("/account/profile");
 }
 
-export async function createBooking(bookingData, formData) {
+export async function createBooking(bookingData, formData: FormData) {
   const session = await auth();
   if (!session) throw new Error("You must be logged in!");
+
+  console.log(typeof bookingData);
 
   const newBooking = {
     ...bookingData,
     guestId: session.user.guestId,
     numGuests: Number(formData.get("numGuests")),
-    observations: formData.get("observations").slice(0, 1000),
+    observations: (formData.get("observations") ?? "").slice(0, 1000),
     extrasPrice: 0,
     totalPrice: bookingData.cabinPrice,
     isPaid: false,

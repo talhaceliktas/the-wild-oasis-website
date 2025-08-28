@@ -1,6 +1,12 @@
 "use client";
 
-const NavButton = ({ open, setOpen }) => {
+const NavButton = ({
+  open,
+  setOpen,
+}: {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   return (
     <button
       onClick={() => setOpen(!open)}

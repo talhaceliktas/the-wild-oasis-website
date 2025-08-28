@@ -1,9 +1,8 @@
-"use client";
-
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode } from "react";
 import { updateGuest } from "../_lib/actions";
 import { User } from "../../types";
 import SubmitButton from "./SubmitButton";
+import Image from "next/image";
 
 const UpdateProfileForm = ({
   children,
@@ -12,9 +11,7 @@ const UpdateProfileForm = ({
   children: ReactNode;
   guest: User;
 }) => {
-  const [count, setCount] = useState();
-
-  const { fullName, email, nationality, nationalID, countryFlag } = guest;
+  const { fullName, email, nationalID, countryFlag } = guest;
 
   return (
     <form
@@ -37,19 +34,21 @@ const UpdateProfileForm = ({
           defaultValue={email}
           disabled
           name="email"
-          className="bg-primary-200 text-primary-800 w-full rounded-sm px-5 py-3 shadow-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
+          className="bg-primary-200 text-primary-800 w-full rounded-sm px-5 py-3 text-base shadow-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400 md:text-lg"
         />
       </div>
 
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <label htmlFor="nationality">Where are you from?</label>
-          <img
-            defaultValue={nationalID}
-            src={countryFlag}
-            alt="Country flag"
-            className="h-5 rounded-sm"
-          />
+          <div className="relative h-5 w-10 overflow-hidden">
+            <Image
+              src={countryFlag}
+              alt="Country flag"
+              className="object-cover"
+              fill
+            />
+          </div>
         </div>
 
         {children}

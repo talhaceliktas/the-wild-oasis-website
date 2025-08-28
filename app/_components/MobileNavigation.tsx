@@ -4,7 +4,13 @@ import Link from "next/link";
 import User from "./Guest";
 import Logo from "./Logo";
 
-export default function MobileNavigation({ open, setOpen }) {
+export default function MobileNavigation({
+  open,
+  setOpen,
+}: {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const onClick = () => setOpen(false);
 
   if (!open)

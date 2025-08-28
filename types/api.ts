@@ -1,3 +1,4 @@
-export interface example {
-  id: number;
-}
+export type Country = {
+  name: string;
+  flag: string;
+};

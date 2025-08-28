@@ -10,12 +10,12 @@ import {
 } from "react";
 
 export interface DataRange {
-  from: Date;
+  from: Date | undefined;
   to?: Date;
 }
 
 export interface ReservationContextType {
-  range: DataRange;
+  range: DataRange | undefined;
   setRange: Dispatch<SetStateAction<DataRange | undefined>>;
   resetRange: () => void;
 }

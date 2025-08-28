@@ -9,7 +9,7 @@ function DeleteReservation({
   onDelete,
 }: {
   bookingId: number;
-  onDelete;
+  onDelete: (bookingId: number) => Promise<void>;
 }) {
   const [isPending, startTransition] = useTransition();
 
