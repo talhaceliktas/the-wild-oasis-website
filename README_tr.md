@@ -12,13 +12,8 @@
 </p>
 </div>
 
-<div align="center">
-<p>
-<strong>🌍 Dil:</strong> 
-<a href="README.md">🇺🇸 English</a> • 
-<a href="README.tr.md">🇹🇷 Türkçe</a>
-</p>
-</div>
+**🌍 Dil:**  
+[🇺🇸 English](README.md) • [🇹🇷 Türkçe](README_tr.md)
 
 ---
 
