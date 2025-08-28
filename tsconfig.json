@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/_lib/data-service.ts",
-    "app/_lib/supabase.js"
+    "app/_lib/supabase.js",
+    "app/_utils/ ThemeProvider.js"
   ],
   "exclude": ["node_modules"]
 }

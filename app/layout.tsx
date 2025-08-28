@@ -4,9 +4,11 @@ import "@/app/_styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import { AuthProvider } from "@/app/_components/AuthContext";
 import { ReservationProvider } from "./_components/ReservationContext";
+import ThemeSwitcher from "./_components/ThemeSwitcher";
 
 import { Josefin_Sans } from "next/font/google";
 import MobileNav from "./_components/MobileNav";
+import ThemeProvider from "./_utils/ ThemeProvider";
 
 const josefin = Josefin_Sans({
   subsets: ["latin"],
@@ -28,20 +30,23 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className="tc-new-price">
+    <html lang="en" className="tc-new-price" suppressHydrationWarning>
       <SessionProvider>
         <AuthProvider>
           <body
             className={`${josefin.className} bg-primary-950 text-primary-100 flex min-h-screen flex-col antialiased`}
           >
-            <Header />
-            <MobileNav />
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <Header />
+              <MobileNav />
 
-            <div className="grid flex-1 px-4 py-8 md:px-8 md:py-12">
-              <main className="mx-auto w-full max-w-7xl">
-                <ReservationProvider>{children}</ReservationProvider>
-              </main>
-            </div>
+              <div className="grid flex-1 px-4 py-8 md:px-8 md:py-12">
+                <main className="mx-auto w-full max-w-7xl">
+                  <ReservationProvider>{children}</ReservationProvider>
+                </main>
+              </div>
+              <ThemeSwitcher />
+            </ThemeProvider>
           </body>
         </AuthProvider>
       </SessionProvider>

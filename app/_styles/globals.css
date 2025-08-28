@@ -1,29 +1,57 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-50: #e1e8ef;
-  --color-primary-100: #d4dee7;
-  --color-primary-200: #b7c7d7;
-  --color-primary-300: #99b0c7;
-  --color-primary-400: #7c99b6;
-  --color-primary-500: #5e82a6;
-  --color-primary-600: #4c6b8a;
-  --color-primary-700: #3c546c;
-  --color-primary-800: #2c3d4f;
-  --color-primary-900: #1b2631;
-  --color-primary-950: #141c24;
+  --color-primary-50: #f8fafc;
+  --color-primary-100: #f1f5f9;
+  --color-primary-200: #e2e8f0;
+  --color-primary-300: #cbd5e1;
+  --color-primary-400: #94a3b8;
+  --color-primary-500: #64748b;
+  --color-primary-600: #475569;
+  --color-primary-700: #334155;
+  --color-primary-800: #1e293b;
+  --color-primary-900: #0f172a;
+  --color-primary-950: #020617;
 
-  --color-accent-50: #faf5f0;
-  --color-accent-100: #f4ece1;
-  --color-accent-200: #e8d6bf;
-  --color-accent-300: #ddc2a2;
-  --color-accent-400: #d2af84;
-  --color-accent-500: #c69963;
-  --color-accent-600: #b78343;
-  --color-accent-700: #926835;
-  --color-accent-800: #6c4d28;
-  --color-accent-900: #4b351b;
-  --color-accent-950: #382814;
+  --color-accent-50: #fefce8;
+  --color-accent-100: #fef3c7;
+  --color-accent-200: #fed7aa;
+  --color-accent-300: #fdba74;
+  --color-accent-400: #fb923c;
+  --color-accent-500: #f97316;
+  --color-accent-600: #ea580c;
+  --color-accent-700: #c2410c;
+  --color-accent-800: #9a3412;
+  --color-accent-900: #7c2d12;
+  --color-accent-950: #431407;
+}
+
+@layer theme {
+  .dark {
+    --color-primary-50: #020617;
+    --color-primary-100: #0f172a;
+    --color-primary-200: #1e293b;
+    --color-primary-300: #334155;
+    --color-primary-400: #475569;
+    --color-primary-500: #64748b;
+    --color-primary-600: #94a3b8;
+    --color-primary-700: #cbd5e1;
+    --color-primary-800: #e2e8f0;
+    --color-primary-900: #f1f5f9;
+    --color-primary-950: #f8fafc;
+
+    --color-accent-50: #431407;
+    --color-accent-100: #7c2d12;
+    --color-accent-200: #9a3412;
+    --color-accent-300: #c2410c;
+    --color-accent-400: #ea580c;
+    --color-accent-500: #f97316;
+    --color-accent-600: #fb923c;
+    --color-accent-700: #fdba74;
+    --color-accent-800: #fed7aa;
+    --color-accent-900: #fef3c7;
+    --color-accent-950: #fefce8;
+  }
 }
 
 @layer components {
