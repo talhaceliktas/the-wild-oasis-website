@@ -53,7 +53,7 @@ const Filter = () => {
 function Button({ filter, handleFilter, activeFilter, children }: ButtonProps) {
   return (
     <button
-      className={`hover:bg-primary-700 px-5 py-2 ${filter === activeFilter && "bg-primary-700 text-primary-50"}`}
+      className={`hover:bg-primary-700 cursor-pointer px-2 py-2 text-sm md:px-5 md:py-3 md:text-lg ${filter === activeFilter && "bg-primary-700 text-primary-50"}`}
       onClick={() => handleFilter(filter)}
     >
       {children}
